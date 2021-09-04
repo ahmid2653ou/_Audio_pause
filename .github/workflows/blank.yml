@@ -1,0 +1,30 @@
+ Else
+            SetError(2)
+        EndIf
+    Else
+        SetError(@error)
+    EndIf
+EndFunc
+
+Func _Set_buffer($buffer)
+    _BASS_SetConfig($BASS_CONFIG_NET_BUFFER, $buffer)
+EndFunc
+
+Func _Audio_stop($_AUDIO_HANDLE)
+    _BASS_ChannelStop($_AUDIO_HANDLE)
+EndFunc
+
+Func _Audio_play($_AUDIO_HANDLE)
+    _BASS_ChannelPlay($_AUDIO_HANDLE, 1)
+EndFunc
+
+Func _Audio_mute()
+    $iVolState = GUICtrlRead($cAudioVolCtrl)
+  
+    If $iVolState > 0 Then
+      _Set_volume(0)
+      GUICtrlSetData($cAudioVolCtrl, 0)
+      GUICtrlSetData($cAudioMute, 'unMute')
+      $_VOLUME_STATE = $iVolState
+      
+    Else
